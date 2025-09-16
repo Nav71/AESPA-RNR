@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:share_plus/share_plus.dart';
-import 'dart:ui';
 
 class DataDetailScreen extends StatefulWidget {
   final String dataId;

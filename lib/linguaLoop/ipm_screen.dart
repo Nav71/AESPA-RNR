@@ -116,12 +116,12 @@ class _IpmScreenState extends State<IpmScreen> {
             ),
           ),
           const SizedBox(height: 15),
-          Text(
+          const Text(
             '73.29',
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF4CAF50),
+              color: Color(0xFF4CAF50),
             ),
           ),
           const SizedBox(height: 10),
@@ -407,10 +407,10 @@ class _IpmScreenState extends State<IpmScreen> {
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: const Color(0xFF4CAF50),
+              color: Color(0xFF4CAF50),
             ),
           ),
         ],

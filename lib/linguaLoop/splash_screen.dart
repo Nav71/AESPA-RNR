@@ -282,11 +282,11 @@ class _SplashScreenState extends State<SplashScreen>
                     const SizedBox(height: 20),
 
                     // App title dengan shadow
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 40),
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             'STATISTIK',
                             style: TextStyle(
                               fontSize: 30,
@@ -302,10 +302,10 @@ class _SplashScreenState extends State<SplashScreen>
                               ],
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
 
                           // Subtitle
-                          const Text(
+                          Text(
                             'Data Indonesia Terpercaya',
                             style: TextStyle(
                               fontSize: 18,
@@ -320,10 +320,10 @@ class _SplashScreenState extends State<SplashScreen>
                               ],
                             ),
                           ),
-                          const SizedBox(height: 40),
+                          SizedBox(height: 40),
 
                           // Loading indicator
-                          const SizedBox(
+                          SizedBox(
                             width: 40,
                             height: 40,
                             child: CircularProgressIndicator(

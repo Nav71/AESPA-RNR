@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'data_detail_screen.dart';
-import 'dart:ui';
 
 class DataListScreen extends StatefulWidget {
   const DataListScreen({super.key});

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart'; // Adjust the import based on your project structure
-import 'dart:ui';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -142,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     await prefs.setBool('first_time', false);
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
   }
 
@@ -151,7 +150,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     await prefs.setBool('first_time', false);
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
   }
 }

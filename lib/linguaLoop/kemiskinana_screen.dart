@@ -486,8 +486,8 @@ class _KemiskinanScreenState extends State<KemiskinanScreen> {
               color: const Color(0xFFFF5722).withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(Icons.location_on,
-                color: const Color(0xFFFF5722), size: 20),
+            child: const Icon(Icons.location_on,
+                color: Color(0xFFFF5722), size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(

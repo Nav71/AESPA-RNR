@@ -5,7 +5,6 @@ import 'statistics_data.dart';
 import 'data_list_screen.dart';
 import 'profile_screen.dart';
 import 'map_screen.dart';
-import 'dart:ui';
 import 'all_publications_screen.dart';
 // Import screens for statistics categories
 import 'tenaga_kerja_screen.dart';
@@ -63,9 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
         index: _selectedIndex,
         children: [
           _buildHomeContent(),
-          DataListScreen(),
-          MapScreen(),
-          ProfileScreen(),
+          const DataListScreen(),
+          const MapScreen(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
