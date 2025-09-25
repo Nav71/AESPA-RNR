@@ -13,6 +13,7 @@ import 'kemiskinana_screen.dart';
 import 'inflasi_screen.dart';
 import 'penduduk_screen.dart';
 import 'pertumbuhan_ekonomi_screen.dart';
+import 'ipg_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -204,170 +205,170 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildStatisticsIconsGrid() {
-    final List<Map<String, dynamic>> statisticsItems = [
-      {
-        'icon': Icons.work,
-        'title': 'Tenaga Kerja',
-        'color': Colors.blue,
-        'screen': const TenagaKerjaScreen()
-      },
-      {
-        'icon': Icons.trending_up,
-        'title': 'IPM',
-        'color': Colors.green,
-        'screen': const IpmScreen()
-      },
-      {
-        'icon': Icons.balance,
-        'title': 'IPG',
-        'color': Colors.purple,
-        'screen': _buildComingSoonScreen(
-            'IPG', 'Indeks Pembangunan Gender', Icons.balance, Colors.purple)
-      },
-      {
-        'icon': Icons.equalizer,
-        'title': 'IDG',
-        'color': Colors.orange,
-        'screen': _buildComingSoonScreen(
-            'IDG', 'Indeks Pemberdayaan Gender', Icons.equalizer, Colors.orange)
-      },
-      {
-        'icon': Icons.pie_chart,
-        'title': 'Rasio',
-        'color': Colors.teal,
-        'screen': _buildComingSoonScreen(
-            'Rasio', 'Rasio Statistik', Icons.pie_chart, Colors.teal)
-      },
-      {
-        'icon': Icons.trending_down,
-        'title': 'Kemiskinan',
-        'color': Colors.red,
-        'screen': const KemiskinanScreen()
-      },
-      {
-        'icon': Icons.attach_money,
-        'title': 'Inflasi',
-        'color': Colors.indigo,
-        'screen': const InflasiScreen()
-      },
-      {
-        'icon': Icons.show_chart,
-        'title': 'Pertumbuhan Ekonomi',
-        'color': Colors.cyan,
-        'screen': const PertumbuhanEkonomiScreen()
-      },
-      {
-        'icon': Icons.school,
-        'title': 'Pendidikan',
-        'color': Colors.deepPurple,
-        'screen': _buildComingSoonScreen('Pendidikan', 'Statistik Pendidikan',
-            Icons.school, Colors.deepPurple)
-      },
-      {
-        'icon': Icons.people,
-        'title': 'Penduduk',
-        'color': Colors.brown,
-        'screen': const PendudukScreen()
-      },
-    ];
+  final List<Map<String, dynamic>> statisticsItems = [
+    {
+      'icon': Icons.work,
+      'title': 'Tenaga Kerja',
+      'color': Colors.blue,
+      'screen': const TenagaKerjaScreen()
+    },
+    {
+      'icon': Icons.trending_up,
+      'title': 'IPM',
+      'color': Colors.green,
+      'screen': const IpmScreen()
+    },
+    // UBAH BAGIAN INI:
+    {
+      'icon': Icons.balance,
+      'title': 'IPG',
+      'color': Colors.purple,
+      'screen': const IPGScreen(), // Ganti dari 'IPG' string menjadi IPGScreen()
+    },
+    {
+      'icon': Icons.equalizer,
+      'title': 'IDG',
+      'color': Colors.orange,
+      'screen': _buildComingSoonScreen(
+          'IDG', 'Indeks Pemberdayaan Gender', Icons.equalizer, Colors.orange)
+    },
+    {
+      'icon': Icons.pie_chart,
+      'title': 'Rasio',
+      'color': Colors.teal,
+      'screen': _buildComingSoonScreen(
+          'Rasio', 'Rasio Statistik', Icons.pie_chart, Colors.teal)
+    },
+    {
+      'icon': Icons.trending_down,
+      'title': 'Kemiskinan',
+      'color': Colors.red,
+      'screen': const KemiskinanScreen()
+    },
+    {
+      'icon': Icons.attach_money,
+      'title': 'Inflasi',
+      'color': Colors.indigo,
+      'screen': const InflasiScreen()
+    },
+    {
+      'icon': Icons.show_chart,
+      'title': 'Pertumbuhan Ekonomi',
+      'color': Colors.cyan,
+      'screen': const PertumbuhanEkonomiScreen()
+    },
+    {
+      'icon': Icons.school,
+      'title': 'Pendidikan',
+      'color': Colors.deepPurple,
+      'screen': _buildComingSoonScreen('Pendidikan', 'Statistik Pendidikan',
+          Icons.school, Colors.deepPurple)
+    },
+    {
+      'icon': Icons.people,
+      'title': 'Penduduk',
+      'color': Colors.brown,
+      'screen': const PendudukScreen()
+    },
+  ];
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.grey[200]!),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
+  // Sisa kode tetap sama...
+  return Container(
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(15),
+      border: Border.all(color: Colors.grey[200]!),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.1),
+          blurRadius: 5,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Kategori Statistik',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey[800],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Kategori Statistik',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[800],
-            ),
+        ),
+        const SizedBox(height: 15),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 5,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.75,
           ),
-          const SizedBox(height: 15),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              mainAxisSpacing: 20, // Increased spacing
-              crossAxisSpacing: 12, // Increased spacing
-              childAspectRatio:
-                  0.75, // Changed from 0.9 to 0.75 for more height
-            ),
-            itemCount: statisticsItems.length,
-            itemBuilder: (context, index) {
-              final item = statisticsItems[index];
-              return _buildStatisticIcon(
-                item['icon'],
-                item['title'],
-                item['color'],
-                item['screen'],
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
+          itemCount: statisticsItems.length,
+          itemBuilder: (context, index) {
+            final item = statisticsItems[index];
+            return _buildStatisticIcon(
+              item['icon'],
+              item['title'],
+              item['color'],
+              item['screen'],
+            );
+          },
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildStatisticIcon(
-      IconData icon, String title, Color color, Widget screen) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => screen),
-        );
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Added this
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10), // Reduced from 12 to 10
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: color.withOpacity(0.3)),
-            ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 24, // Reduced from 28 to 24
-            ),
+    IconData icon, String title, Color color, Widget screen) {
+  return GestureDetector(
+    onTap: () {
+  // Langsung saja navigasi, karena kita sudah yakin 'screen' adalah Widget
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
+  );
+},
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color.withOpacity(0.3)),
           ),
-          const SizedBox(height: 6), // Reduced from 8 to 6
-          Flexible(
-            // Changed from Expanded to Flexible
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 9, // Reduced from 10 to 9
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[700],
-                height: 1.2, // Added line height
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
+          child: Icon(
+            icon,
+            color: color,
+            size: 24,
           ),
-        ],
-      ),
-    );
-  }
+        ),
+        const SizedBox(height: 6),
+        Flexible(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[700],
+              height: 1.2,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildComingSoonScreen(
       String title, String description, IconData icon, Color color) {

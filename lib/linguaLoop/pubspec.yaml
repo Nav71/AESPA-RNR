@@ -1,5 +1,6 @@
 name: statistik_indonesia
-description: Aplikasi Statistik Indonesia - Data terpercaya dan komprehensif
+description: Aplikasi Statistik Indonesia - Data terpercaya dan komprehensif.
+publish_to: 'none' # Mencegah publikasi yang tidak disengaja
 
 version: 1.0.0+1
 
@@ -7,99 +8,75 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
   flutter: ">=3.10.0"
 
+# =================== DEPENDENCIES ===================
+# Semua paket aplikasi Anda ada di sini, diurutkan secara alfabet.
 dependencies:
   flutter:
     sdk: flutter
 
-  # UI Dependencies
+  cached_network_image: ^3.3.0
+  collection: ^1.17.2
+  connectivity_plus: ^5.0.1
+  crypto: ^3.0.3
+  csv: ^5.1.1
   cupertino_icons: ^1.0.2
-
-  # State Management & Navigation
-  provider: ^6.0.5
-  get: ^4.6.5
-
-  # HTTP & API
-  http: ^1.2.1
+  device_info_plus: ^9.1.1
   dio: ^5.3.2
-  
-  # Data Handling
+  equatable: ^2.0.5
   excel: ^4.0.2
-  csv: ^5.1.1 
-  intl: ^0.18.1
-
-  # Charts & Visualization
+  file_picker: ^10.3.1
   fl_chart: ^0.68.0
-  syncfusion_flutter_charts: ^23.1.36
-
-  # Storage & Preferences
-  shared_preferences: ^2.2.2
+  geolocator: ^10.1.0
+  get: ^4.6.5
+  google_maps_flutter: ^2.5.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  path_provider: ^2.1.1
-
-  # File Handling & Export
-  path: ^1.8.3
-  open_file: ^3.3.2
-
-  # Sharing & URL
-  share_plus: ^7.2.1
-  url_launcher: ^6.2.1
-  file_picker: ^10.3.1
-
-  # Image & Media
-  cached_network_image: ^3.3.0
+  http: ^1.2.1
   image: ^4.1.3
-
-  # PDF Generation
-  pdf: ^3.10.7
-  printing: ^5.11.1
-
-  # Permissions & Device Info
-  permission_handler: ^11.0.1
-  device_info_plus: ^9.1.1
+  intl: ^0.18.1
+  lottie: ^2.7.0
+  open_file: ^3.3.2 # CATATAN: di kode Anda namanya 'open_file', bukan 'open_file_plus'
   package_info_plus: ^4.2.0
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  pdf: ^3.10.7
+  permission_handler: ^11.0.1
+  printing: ^5.12.0 # VERSI DIPERBARUI
+  provider: ^6.0.5
+  pull_to_refresh: ^2.0.0
+  share_plus: ^7.2.1
+  shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
+  syncfusion_flutter_charts: ^23.1.36
+  url_launcher: ^6.2.4 # VERSI DIPERBARUI
   video_player: ^2.8.13
 
-  # Connectivity
-  connectivity_plus: ^5.0.1
 
-  # Animation & UI Enhancements
-  lottie: ^2.7.0
-  shimmer: ^3.0.0
-  pull_to_refresh: ^2.0.0
-
-  # Map (if using Google Maps)
-  google_maps_flutter: ^2.5.0
-  geolocator: ^10.1.0
-
-  # Security & Encryption
-  crypto: ^3.0.3
-
-  # Utils
-  equatable: ^2.0.5
-  collection: ^1.17.2
-
+# =================== DEV DEPENDENCIES ===================
+# Paket yang hanya digunakan saat development/pengembangan.
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
   build_runner: ^2.4.7
+  flutter_lints: ^3.0.0
   hive_generator: ^2.0.1
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
 
+
+# =================== FLUTTER CONFIGURATION ===================
 flutter:
   uses-material-design: true
 
-  # Assets
+  # Aset gambar, video, dan animasi
   assets:
     - assets/images/Statistik.png
     - assets/icons/Sad man walking in rain.mp4
     - assets/animations/ringan.mp4
     - assets/maps/wired-outline-18-location-pin-hover-jump.mp4
 
-  # Fonts
+  # Konfigurasi Font
   fonts:
     - family: Poppins
       fonts:
@@ -120,15 +97,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/Montserrat-Bold.ttf
           weight: 700
-
-# Flutter configuration
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icons/statistik.png"
-  min_sdk_android: 21
-
-# Additional configurations
-dependency_overrides:
-  # Fix potential conflicts
-  collection: ^1.17.2
