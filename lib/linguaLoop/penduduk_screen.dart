@@ -681,48 +681,55 @@ class _PendudukScreenState extends State<PendudukScreen> with AutomaticKeepAlive
   }
 
  Widget _buildYearSelector() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 5,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.calendar_today, color: Colors.grey[600], size: 18),
-              const SizedBox(width: 8),
-              Text(
-                'Pilih Tahun Data',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
-                ),
+  return Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.1),
+          blurRadius: 5,
+          offset: const Offset(0, 2),
+        ),
+      ],
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          // ... (kode judul tidak berubah)
+          children: [
+            Icon(Icons.calendar_today, color: Colors.grey[600], size: 18),
+            const SizedBox(width: 8),
+            Text(
+              'Pilih Tahun Data',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
               ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: availableYears.map((year) {
-              final isSelected = year == selectedYear;
-              return GestureDetector(
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          alignment: WrapAlignment.start,
+          children: availableYears.map((year) {
+            final isSelected = year == selectedYear;
+            return SizedBox(
+              // PENYESUAIAN: Coba kecilkan nilai width di sini
+              // Ubah angka 68 ini sesuai selera Anda (misal: 65, 70, dst)
+              width: 63,
+              child: GestureDetector(
                 onTap: () => setState(() {
                   selectedYear = year;
                 }),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: isSelected ? const Color.fromARGB(255, 121, 85, 72) : Colors.grey[100],
                     borderRadius: BorderRadius.circular(20),
@@ -739,15 +746,14 @@ class _PendudukScreenState extends State<PendudukScreen> with AutomaticKeepAlive
                     ),
                   ),
                 ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-
-
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    ),
+  );
+}
   Widget _buildPopulationStats() {
     final data = currentSemarangData;
     return Column(
