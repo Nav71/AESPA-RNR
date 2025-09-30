@@ -508,7 +508,7 @@ class _PendudukScreenState extends State<PendudukScreen> with AutomaticKeepAlive
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Unduh Data Lengkap',
+              'Download Laporan',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
