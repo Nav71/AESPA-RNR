@@ -51,7 +51,6 @@ dependencies:
   url_launcher: ^6.2.4 # VERSI DIPERBARUI
   video_player: ^2.8.13
 
-
 # =================== DEV DEPENDENCIES ===================
 # Paket yang hanya digunakan saat development/pengembangan.
 dev_dependencies:

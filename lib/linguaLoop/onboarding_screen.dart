@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home_screen.dart'; // Adjust the import based on your project structure
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  List<OnboardingData> onboardingPages = [
+  final List<OnboardingData> onboardingPages = [
     OnboardingData(
       title: "Data Statistik Terlengkap",
       description:
@@ -36,6 +35,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       color: const Color(0xFFF57C00),
     ),
   ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,14 +96,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         child: Text(
                           'Lewati',
                           style: TextStyle(
-                            color: Colors.grey[600],
+                            color: _currentPage == onboardingPages.length - 1
+                                ? Colors.transparent
+                                : Colors.grey[600],
                             fontSize: 16,
                           ),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: _currentPage == onboardingPages.length - 1
-                            ? () => _finishOnboarding()
+                            ? () => _showRoleSelection()
                             : () => _nextPage(),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: onboardingPages[_currentPage].color,
@@ -136,22 +143,155 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  void _skipOnboarding() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('first_time', false);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+  Future<void> _skipOnboarding() async {
+    _showRoleSelection();
+  }
+
+  void _showRoleSelection() {
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      enableDrag: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Handle bar
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+
+            // Icon
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFF1976D2).withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.person_outline,
+                size: 48,
+                color: Color(0xFF1976D2),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Title
+            const Text(
+              'Pilih Peran Anda',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Subtitle
+            Text(
+              'Silakan pilih untuk melanjutkan',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 32),
+
+            // User Button
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton.icon(
+                onPressed: () => _finishAsUser(),
+                icon: const Icon(Icons.person, size: 24),
+                label: const Text(
+                  'Masuk sebagai User',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF1976D2),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 2,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Admin Button
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: OutlinedButton.icon(
+                onPressed: () => _finishAsAdmin(),
+                icon: const Icon(Icons.admin_panel_settings, size: 24),
+                label: const Text(
+                  'Masuk sebagai Admin',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFF1976D2),
+                  side: const BorderSide(
+                    color: Color(0xFF1976D2),
+                    width: 2,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+          ],
+        ),
+      ),
     );
   }
 
-  void _finishOnboarding() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('first_time', false);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
+  Future<void> _finishAsUser() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('first_time', false);
+
+      if (mounted) {
+        Navigator.of(context).pop(); // Close bottom sheet
+        Navigator.of(context).pushReplacementNamed('/home');
+      }
+    } catch (e) {
+      debugPrint('Error finishing as user: $e');
+    }
+  }
+
+  Future<void> _finishAsAdmin() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('first_time', false);
+
+      if (mounted) {
+        Navigator.of(context).pop(); // Close bottom sheet
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
+    } catch (e) {
+      debugPrint('Error finishing as admin: $e');
+    }
   }
 }
 
@@ -172,7 +312,7 @@ class OnboardingData {
 class OnboardingPage extends StatelessWidget {
   final OnboardingData data;
 
-  const OnboardingPage({super.key, required this.data});
+  const OnboardingPage({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
